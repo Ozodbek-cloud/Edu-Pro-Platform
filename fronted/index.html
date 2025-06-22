@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Email Verification</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --primary-color: #4361ee;
+      --secondary-color: #3f37c9;
+      --success-color: #4cc9f0;
+      --error-color: #f72585;
+      --light-color: #f8f9fa;
+      --dark-color: #212529;
+      --border-radius: 8px;
+      --box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+    
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    
+    body {
+      font-family: 'Poppins', sans-serif;
+      background-color: #f5f7ff;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      padding: 20px;
+    }
+    
+    .container {
+      background-color: white;
+      border-radius: var(--border-radius);
+      box-shadow: var(--box-shadow);
+      padding: 40px;
+      width: 100%;
+      max-width: 500px;
+      text-align: center;
+    }
+    
+    .logo {
+      margin-bottom: 20px;
+    }
+    
+    .logo img {
+      height: 60px;
+    }
+    
+    h2 {
+      color: var(--dark-color);
+      margin-bottom: 25px;
+      font-weight: 600;
+    }
+    
+    .verify-form {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+    
+    .form-group {
+      text-align: left;
+    }
+    
+    label {
+      display: block;
+      margin-bottom: 8px;
+      font-weight: 500;
+      color: var(--dark-color);
+    }
+    
+    input {
+      width: 100%;
+      padding: 12px 15px;
+      border: 1px solid #ddd;
+      border-radius: var(--border-radius);
+      font-size: 16px;
+      transition: border-color 0.3s;
+    }
+    
+    input:focus {
+      outline: none;
+      border-color: var(--primary-color);
+      box-shadow: 0 0 0 2px rgba(67, 97, 238, 0.2);
+    }
+    
+    button {
+      background-color: var(--primary-color);
+      color: white;
+      border: none;
+      padding: 14px;
+      border-radius: var(--border-radius);
+      font-size: 16px;
+      font-weight: 500;
+      cursor: pointer;
+      transition: background-color 0.3s;
+      margin-top: 10px;
+    }
+    
+    button:hover {
+      background-color: var(--secondary-color);
+    }
+    
+    #message {
+      margin-top: 25px;
+      padding: 12px;
+      border-radius: var(--border-radius);
+      font-size: 15px;
+      display: none;
+    }
+    
+    .success {
+      background-color: rgba(76, 201, 240, 0.2);
+      color: #0a6c7e;
+      border-left: 4px solid var(--success-color);
+      display: block;
+    }
+    
+    .error {
+      background-color: rgba(247, 37, 133, 0.2);
+      color: #a4133c;
+      border-left: 4px solid var(--error-color);
+      display: block;
+    }
+    
+    .resend-link {
+      margin-top: 20px;
+      font-size: 14px;
+    }
+    
+    .resend-link a {
+      color: var(--primary-color);
+      text-decoration: none;
+      font-weight: 500;
+    }
+    
+    .resend-link a:hover {
+      text-decoration: underline;
+    }
+    
+    @media (max-width: 600px) {
+      .container {
+        padding: 30px 20px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="logo">
+      <!-- Replace with your logo -->
+      <svg width="60" height="60" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M3 8L10.8906 13.2604C11.5624 13.7083 12.4376 13.7083 13.1094 13.2604L21 8M5 19H19C20.1046 19 21 18.1046 21 17V7C21 5.89543 20.1046 5 19 5H5C3.89543 5 3 5.89543 3 7V17C3 18.1046 3.89543 19 5 19Z" stroke="#4361ee" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+    </div>
+    
+    <h2>Emailni tasdiqlash</h2>
+    
+    <form id="registerForm" class="verify-form">
+  <div class="form-group">
+    <label for="username">Ismingiz</label>
+    <input type="text" id="username" placeholder="Ali" required>
+  </div>
+
+  <div class="form-group">
+    <label for="surname">Familiyangiz</label>
+    <input type="text" id="surname" placeholder="Valiyev" required>
+  </div>
+
+  <div class="form-group">
+    <label for="email">Email manzilingiz</label>
+    <input type="email" id="email" placeholder="email@example.com" required>
+  </div>
+
+  <div class="form-group">
+    <label for="password">Parolingiz</label>
+    <input type="password" id="password" placeholder="********" required>
+  </div>
+
+  <button type="submit">Ro‘yxatdan o‘tish</button>
+   </form>
+    
+    <div class="resend-link">
+      Kodni olmadingizmi? <a href="#" id="resendCode">Qayta yuborish</a>
+    </div>
+    
+    <div id="message"></div>
+  </div>
+
+  <script>
+    document.getElementById('registerForm').addEventListener('submit', async (e) => {
+  e.preventDefault();
+
+  const username = document.getElementById('username').value;
+  const surname = document.getElementById('surname').value;
+  const email = document.getElementById('email').value;
+  const password = document.getElementById('password').value;
+  const messageEl = document.getElementById('message');
+
+  messageEl.className = '';
+  messageEl.style.display = 'none';
+
+  try {
+    const response = await fetch('http://localhost:6514/users/register', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({ username, surname, email, password })
+    });
+
+    const data = await response.json();
+    messageEl.innerText = data.message || (response.ok ? "Ro'yxatdan o'tdingiz! Emailga kod yuborildi." : "Xatolik yuz berdi.");
+    messageEl.className = response.ok ? 'success' : 'error';
+    messageEl.style.display = 'block';
+
+  } catch (err) {
+    messageEl.innerText = "Server bilan aloqa yo'q. Iltimos, internet aloqangizni tekshiring.";
+    messageEl.className = 'error';
+    messageEl.style.display = 'block';
+  }
+});
+
+    
+    // Resend code functionality
+    document.getElementById('resendCode').addEventListener('click', async (e) => {
+      e.preventDefault();
+      const email = document.getElementById('email').value;
+      const messageEl = document.getElementById('message');
+      
+      if (!email) {
+        messageEl.innerText = "Iltimos, email manzilingizni kiriting.";
+        messageEl.className = 'error';
+        messageEl.style.display = 'block';
+        return;
+      }
+      
+      try {
+        const response = await fetch('http://localhost:3000/users/resend-verification', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({ email })
+        });
+
+        const data = await response.json();
+        messageEl.innerText = data.message || (response.ok ? "Yangi tasdiqlash kodi emailingizga yuborildi!" : "Xatolik: Yangi kod yuborib bo'lmadi.");
+        messageEl.className = response.ok ? 'success' : 'error';
+        messageEl.style.display = 'block';
+        
+      } catch (err) {
+        messageEl.innerText = "Server bilan aloqa yo'q. Iltimos, internet aloqangizni tekshiring.";
+        messageEl.className = 'error';
+        messageEl.style.display = 'block';
+      }
+    });
+  </script>
+</body>
+</html>
