@@ -1,7 +1,8 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectModel } from '@nestjs/sequelize';
 import { Courses } from 'src/common/models/courses.model';
 import { CourseModule } from './course.module';
+import { CourseDto } from './CourseDto/course.dto';
 
 @Injectable()
 export class CourseService {
@@ -20,7 +21,7 @@ export class CourseService {
     async get_one(id: number) {
         let one_course = await this.courseModel.findOne({
             where: {
-                course: id
+                course_id: id
             }
         })
         return one_course
@@ -32,6 +33,19 @@ export class CourseService {
                 course_id: id
             }
         })
-        return delete_one
+        return {message: "Success", success: true}
     }
+
+   async change(courseId: number, payload: Partial<CourseDto>) {
+    const course = await this.courseModel.findByPk(courseId);
+
+  if (!course) {
+    throw new NotFoundException(`Course with id ${courseId} not found`);
+  }
+
+   await course.update(payload);
+
+    return { message: "Course successfully updated", data: course,};
+}
+
 }

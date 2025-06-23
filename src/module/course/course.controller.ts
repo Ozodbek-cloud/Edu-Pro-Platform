@@ -1,4 +1,4 @@
-import { Body, Controller, Delete, Get, Param, Post } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Param, Patch, Post } from '@nestjs/common';
 import { CourseService } from './course.service';
 import { CourseDto } from './CourseDto/course.dto';
 import { Auth } from 'src/global/decorator/user.decorator';
@@ -21,7 +21,7 @@ export class CourseController {
     }
 
     @Auth(UserRole.INSTUCTOR, UserRole.ADMIN)
-    @Get('courses/:id')
+    @Get(':id')
     One_Course(@Param("id") id: number) {
         return this.courseService.get_one(id)
     }
@@ -30,5 +30,11 @@ export class CourseController {
     @Delete('delete_one/:id')
     Delete_One(@Param("id") id: number) {
         return this.courseService.delete_one(id)
+    }
+
+    @Auth(UserRole.INSTUCTOR, UserRole.ADMIN)
+    @Patch("change/:id")
+    ChangeCourse(@Param('id') id: number,  @Body() payload: Partial<CourseDto>) {
+        return this.courseService.change(id, payload)
     }
 }

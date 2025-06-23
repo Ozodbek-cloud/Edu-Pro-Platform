@@ -19,21 +19,21 @@ export class UsersService {
     }
 
     async register(payload: Required<RegisterDto>) {
-        let exists = await this.userModel.findOne({
-            where: {
-                username: payload.username
-            }
-        })
+        // let exists = await this.userModel.findOne({
+        //     where: {
+        //         username: payload.username
+        //     }
+        // })
 
-        if (exists) throw new ConflictException(`this ${payload.username} is already exists`)
+        // if (exists) throw new ConflictException(`this ${payload.username} is already exists`)
         
-        let email_exists = await this.userModel.findOne({
-            where: {
-                email: payload.email
-            }
-        })
+        // let email_exists = await this.userModel.findOne({
+        //     where: {
+        //         email: payload.email
+        //     }
+        // })
 
-        if (email_exists) throw new ConflictException(`this ${payload.email} is already exists`)
+        // if (email_exists) throw new ConflictException(`this ${payload.email} is already exists`)
         let hash = await bcrypt.hash(payload.password, 10)
         
         let data = await this.userModel.create({...payload, password: hash})
