@@ -3,6 +3,7 @@ import { InjectModel } from '@nestjs/sequelize';
 import { Courses } from 'src/common/models/courses.model';
 import { CourseModule } from './course.module';
 import { CourseDto } from './CourseDto/course.dto';
+import { Lessons } from 'src/common/models/lesson.model';
 
 @Injectable()
 export class CourseService {
@@ -13,10 +14,16 @@ export class CourseService {
         return newCourse
     }
 
-    async get_all() {
-        let all = await this.courseModel.findAll()
-        return all
+  async get_all() {
+  const all = await this.courseModel.findAll({
+    include: {
+      model: Lessons,
+      as: 'lessons',
     }
+  });
+
+  return all;
+}
 
     async get_one(id: number) {
         let one_course = await this.courseModel.findOne({

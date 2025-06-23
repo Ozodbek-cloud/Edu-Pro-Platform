@@ -11,6 +11,7 @@ async function bootstrap() {
     .setTitle('Edu Pro Platform')
     .setDescription('API description')
     .setVersion('1.0')
+    .addBearerAuth()
     .addTag('EduPro School')
     .build();
   const documentFactory = () => SwaggerModule.createDocument(app, config);
