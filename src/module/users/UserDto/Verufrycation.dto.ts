@@ -8,7 +8,7 @@ export class VerificationDto{
 
     @IsNumber()
     @IsNotEmpty()
-    code: number
+    verifyCode: number
 
     @IsString()
     password: string
