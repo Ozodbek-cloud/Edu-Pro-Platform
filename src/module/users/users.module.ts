@@ -7,10 +7,11 @@ import { JwtRefresh } from 'src/common/jwt/jwt.refesh.module';
 import { JwtAccess } from 'src/common/jwt/jwt.access.module';
 import { MailService } from 'src/common/mail/mail.service';
 import { MailModule } from 'src/common/mail/mail.module';
+import { RedicModule } from 'src/common/redic/redic.module';
 
 @Module({
   imports: [SequelizeModule.forFeature([Users]),
-  JwtRefresh, JwtAccess, MailModule],
+  JwtRefresh, JwtAccess, MailModule, RedicModule],
   providers: [UsersService],
   controllers: [UsersController]
 })

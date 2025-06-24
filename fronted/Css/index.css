@@ -1,0 +1,326 @@
+/* Base Styles with Dark Theme */
+:root {
+  --primary: #6c5ce7; /* Vibrant purple */
+  --secondary: #a29bfe; /* Light purple */
+  --dark: #2d3436; /* Deep black */
+  --darker: #1e272e; /* Darker black */
+  --light: #f5f6fa; /* Off-white */
+  --accent: #fd79a8; /* Pink accent */
+  --success: #00b894; /* Green */
+  --text: #f5f6fa; /* Light text */
+  --text-dark: #2d3436; /* Dark text */
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+body {
+  font-family: 'Poppins', 'Segoe UI', system-ui, sans-serif;
+  line-height: 1.6;
+  background-color: var(--dark);
+  color: var(--text);
+}
+
+/* Login Page - Animated Gradient Background */
+.login-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background: linear-gradient(-45deg, #1e272e, #6c5ce7, #fd79a8, #00b894);
+  background-size: 400% 400%;
+  animation: gradientBG 15s ease infinite;
+}
+
+@keyframes gradientBG {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+.login-form {
+  background: rgba(45, 52, 54, 0.9);
+  padding: 2.5rem;
+  border-radius: 16px;
+  width: 100%;
+  max-width: 420px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+  backdrop-filter: blur(10px);
+  transform: translateY(0);
+  transition: transform 0.4s ease, box-shadow 0.4s ease;
+}
+
+.login-form:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.4);
+}
+
+.login-form h2 {
+  color: var(--primary);
+  text-align: center;
+  margin-bottom: 1.5rem;
+  font-size: 2rem;
+  font-weight: 700;
+}
+
+.login-form input {
+  width: 100%;
+  padding: 1rem;
+  margin-bottom: 1.5rem;
+  border: 2px solid var(--darker);
+  border-radius: 8px;
+  background: var(--darker);
+  color: var(--text);
+  font-size: 1rem;
+  transition: all 0.3s ease;
+}
+
+.login-form input:focus {
+  border-color: var(--primary);
+  outline: none;
+  transform: scale(1.02);
+  box-shadow: 0 0 0 3px rgba(108, 92, 231, 0.3);
+}
+
+.login-form button {
+  width: 100%;
+  padding: 1rem;
+  background: var(--primary);
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  margin-bottom: 1.5rem;
+}
+
+.login-form button:hover {
+  background: var(--secondary);
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(108, 92, 231, 0.4);
+}
+
+.login-form button:active {
+  transform: translateY(0);
+}
+
+.login-form p {
+  text-align: center;
+  margin: 0.5rem 0;
+}
+
+.login-form a {
+  color: var(--accent);
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.3s ease;
+}
+
+.login-form a:hover {
+  color: var(--secondary);
+  text-decoration: underline;
+}
+
+/* Student Dashboard - Dark Theme with Glow Effects */
+.student-dashboard {
+  display: flex;
+  min-height: 100vh;
+  background-color: var(--dark);
+}
+
+.sidebar {
+  width: 280px;
+  background: var(--darker);
+  padding: 2rem 1.5rem;
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  border-right: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.logo {
+  font-size: 1.8rem;
+  font-weight: 700;
+  margin-bottom: 2.5rem;
+  color: var(--primary);
+  text-align: center;
+  text-shadow: 0 0 10px rgba(108, 92, 231, 0.5);
+  animation: glow 2s ease-in-out infinite alternate;
+}
+
+@keyframes glow {
+  from { text-shadow: 0 0 5px rgba(108, 92, 231, 0.5); }
+  to { text-shadow: 0 0 15px rgba(108, 92, 231, 0.8); }
+}
+
+.sidebar nav ul {
+  list-style: none;
+}
+
+.sidebar nav li {
+  margin: 1.2rem 0;
+  position: relative;
+  overflow: hidden;
+}
+
+.sidebar nav a {
+  color: var(--text);
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  padding: 0.8rem 1.2rem;
+  border-radius: 8px;
+  font-weight: 500;
+  transition: all 0.3s ease;
+  position: relative;
+  z-index: 1;
+}
+
+.sidebar nav a::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(108, 92, 231, 0.2), transparent);
+  transition: 0.5s;
+}
+
+.sidebar nav a:hover {
+  background: rgba(108, 92, 231, 0.1);
+  transform: translateX(8px);
+  color: var(--primary);
+}
+
+.sidebar nav a:hover::before {
+  left: 100%;
+}
+
+.main-content {
+  flex: 1;
+  padding: 2.5rem;
+}
+
+header h1 {
+  font-size: 2.2rem;
+  margin-bottom: 2rem;
+  color: var(--text);
+  position: relative;
+  display: inline-block;
+}
+
+header h1::after {
+  content: '';
+  position: absolute;
+  bottom: -8px;
+  left: 0;
+  width: 60px;
+  height: 4px;
+  background: var(--primary);
+  border-radius: 2px;
+}
+
+.course-overview h2 {
+  font-size: 1.8rem;
+  margin-bottom: 1.5rem;
+  color: var(--text);
+}
+
+.course-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 1.8rem;
+}
+
+.course-card {
+  background: var(--darker);
+  border-radius: 12px;
+  padding: 1.8rem;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+  transition: all 0.4s ease;
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  position: relative;
+  overflow: hidden;
+}
+
+.course-card::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: linear-gradient(
+    to bottom right,
+    rgba(108, 92, 231, 0) 0%,
+    rgba(108, 92, 231, 0.1) 50%,
+    rgba(108, 92, 231, 0) 100%
+  );
+  transform: rotate(45deg);
+  transition: all 0.6s ease;
+}
+
+.course-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 12px 25px rgba(0, 0, 0, 0.3);
+  border-color: rgba(108, 92, 231, 0.3);
+}
+
+.course-card:hover::before {
+  left: 100%;
+  top: 100%;
+}
+
+.course-card h3 {
+  font-size: 1.3rem;
+  margin-bottom: 1rem;
+  color: var(--primary);
+}
+
+.progress-bar {
+  height: 10px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 5px;
+  margin: 1.2rem 0;
+  overflow: hidden;
+}
+
+.progress {
+  height: 100%;
+  background: linear-gradient(90deg, var(--primary), var(--accent));
+  border-radius: 5px;
+  position: relative;
+  transition: width 0.8s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+}
+
+.progress::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(
+    90deg,
+    rgba(255, 255, 255, 0.2) 0%,
+    rgba(255, 255, 255, 0) 100%
+  );
+  animation: shine 2s infinite;
+}
+
+@keyframes shine {
+  0% { transform: translateX(-100%); }
+  100% { transform: translateX(100%); }
+}
+
+.course-card p {
+  color: rgba(255, 255, 255, 0.7);
+  font-size: 0.9rem;
+}

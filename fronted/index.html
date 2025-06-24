@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Edu Platform - Login</title>
+  <link rel="stylesheet" href="./Css/index.css" />
+</head>
+<body>
+  <div class="login-container">
+    <form class="login-form">
+      <h2>Login</h2>
+      <input type="email" placeholder="Email" required />
+      <input type="password" placeholder="Password" required />
+      <button type="submit">Login</button>
+      <p><a href="student-register.html">Student Registration</a></p>
+      <p><a href="instructor-register.html">Instructor Registration</a></p>
+    </form>
+  </div>
+</body>
+</html>
+
+<!-- Updated: student/dashboard.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Student Panel</title>
+  <link rel="stylesheet" href="../assets/css/style.css">
+</head>
+<body>
+  <div class="student-dashboard">
+    <aside class="sidebar">
+      <div class="logo">EduPlatform</div>
+      <nav>
+        <ul>
+          <li><a href="dashboard.html">🏠 Dashboard</a></li>
+          <li><a href="my-courses.html">📚 My Courses</a></li>
+          <li><a href="profile.html">👤 Profile</a></li>
+          <li><a href="../auth/login.html">🚪 Logout</a></li>
+        </ul>
+      </nav>
+    </aside>
+    <main class="main-content">
+      <header>
+        <h1>Welcome, Student 👋</h1>
+      </header>
+      <section class="course-overview">
+        <h2>Your Courses</h2>
+        <div class="course-list">
+          <div class="course-card">
+            <h3>JavaScript Basics</h3>
+            <div class="progress-bar">
+              <div class="progress" style="width: 40%"></div>
+            </div>
+            <p>Progress: 40%</p>
+          </div>
+          <div class="course-card">
+            <h3>React for Beginners</h3>
+            <div class="progress-bar">
+              <div class="progress" style="width: 80%"></div>
+            </div>
+            <p>Progress: 80%</p>
+          </div>
+        </div>
+      </section>
+    </main>
+  </div>
+</body>
+</html>
+
+<!-- Sample: style.css (continued) -->

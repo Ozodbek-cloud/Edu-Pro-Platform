@@ -5,6 +5,7 @@ import { UsersModule } from './module/users/users.module';
 import { LessonModule } from './module/lesson/lesson.module';
 import { CourseModule } from './module/course/course.module';
 import { MailModule } from './common/mail/mail.module';
+import { RedicModule } from './common/redic/redic.module';
 
 
 @Module({
@@ -14,7 +15,8 @@ import { MailModule } from './common/mail/mail.module';
     UsersModule,
     LessonModule,
     CourseModule,
-    MailModule,],
+    MailModule,
+    RedicModule,],
 
 })
 export class AppModule {}
